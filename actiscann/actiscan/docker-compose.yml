@@ -1,0 +1,8 @@
+services:
+  macuin:
+    build: .
+    container_name: actiscan_app
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/appv
