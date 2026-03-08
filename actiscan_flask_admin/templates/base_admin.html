@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Panel Admin - ActiScan{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body class="admin-body">
+    <div class="admin-layout">
+        <aside class="sidebar" id="sidebar">
+            <nav class="sidebar-nav">
+                <a href="{{ url_for('dashboard') }}" class="sidebar-link {% block nav_dashboard %}{% endblock %}">Dashboard</a>
+                <a href="{{ url_for('activos') }}" class="sidebar-link {% block nav_activos %}{% endblock %}">Activos</a>
+                <a href="{{ url_for('categorias') }}" class="sidebar-link {% block nav_categorias %}{% endblock %}">Categoría Activos</a>
+                <a href="{{ url_for('auditoria') }}" class="sidebar-link {% block nav_auditoria %}{% endblock %}">Auditoría</a>
+                <a href="{{ url_for('usuarios') }}" class="sidebar-link {% block nav_usuarios %}{% endblock %}">Gestión de usuarios</a>
+                <a href="{{ url_for('perfil') }}" class="sidebar-link {% block nav_perfil %}{% endblock %}">Perfil del admin</a>
+                <a href="{{ url_for('cambiar_password') }}" class="sidebar-link {% block nav_password %}{% endblock %}">Cambiar Contraseña</a>
+
+                <div class="sidebar-bottom">
+                    <a href="{{ url_for('login') }}" class="logout-link">Cerrar sesión</a>
+                </div>
+            </nav>
+        </aside>
+
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <section class="main-panel">
+            <header class="topbar">
+                <button class="menu-icon" id="menuToggle" type="button">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="brand">
+                    <div class="brand-logo">
+                        <div class="mini-box">A</div>
+                        <div class="mini-box">▦</div>
+                        <div class="mini-box">S</div>
+                        <div class="mini-box"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    </div>
+                    <div class="brand-text">
+                        <h1>ActiScan</h1>
+                        <p>Gestión de Activos</p>
+                    </div>
+                </div>
+
+                <div class="user-pill">
+                    <span class="user-badge">GM</span>
+                    <span>Gael Jesus Martinez</span>
+                </div>
+            </header>
+
+            <div class="panel-content">
+                {% block content %}{% endblock %}
+            </div>
+        </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

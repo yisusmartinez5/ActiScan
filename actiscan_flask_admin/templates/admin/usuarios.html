@@ -1,0 +1,58 @@
+{% extends "base_admin.html" %}
+
+{% block title %}Usuarios{% endblock %}
+{% block nav_usuarios %}active{% endblock %}
+
+{% block content %}
+<div class="user-header">
+    <div>
+        <h1 class="page-title" style="margin-bottom:0;">Usuarios</h1>
+    </div>
+
+    <a href="{{ url_for('registrar_usuario') }}">
+        <button class="new-user-btn">+ NUEVO USUARIO</button>
+    </a>
+</div>
+
+<div class="table-card">
+    <div class="table-tools" style="grid-template-columns: 3fr auto;">
+        <input class="auth-input" type="text" placeholder="Filtrar por nombre..." style="margin:0;">
+        <button class="filter-btn">FILTROS AVANZADOS</button>
+    </div>
+
+    <table class="simple-table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Correo</th>
+                <th>Rol</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Gael Jesus</td>
+                <td>Martinez Garcia</td>
+                <td>123046505@upq.edu.mx</td>
+                <td>Administrador</td>
+                <td class="option-icons"><i class="fa-regular fa-pen-to-square"></i><i class="fa-regular fa-trash-can"></i></td>
+            </tr>
+            <tr>
+                <td>Eliseo</td>
+                <td>Novas Echeverría</td>
+                <td>123046476@upq.edu.mx</td>
+                <td>Capturista</td>
+                <td class="option-icons"><i class="fa-regular fa-pen-to-square"></i><i class="fa-regular fa-trash-can"></i></td>
+            </tr>
+            <tr>
+                <td>Diana Maria</td>
+                <td>Uribe Hernández</td>
+                <td>123046550@upq.edu.mx</td>
+                <td>Capturista</td>
+                <td class="option-icons"><i class="fa-regular fa-pen-to-square"></i><i class="fa-regular fa-trash-can"></i></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

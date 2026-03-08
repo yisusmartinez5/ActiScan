@@ -1,0 +1,35 @@
+{% extends "base_admin.html" %}
+
+{% block title %}Gestión de Usuarios{% endblock %}
+{% block nav_usuarios %}active{% endblock %}
+
+{% block content %}
+<div class="user-card-form">
+    <h1 class="user-form-title">Gestión de Usuarios</h1>
+
+    <label class="auth-label">Usuario:</label>
+    <input class="auth-input" type="text">
+
+    <label class="auth-label">Nombre:</label>
+    <input class="auth-input" type="text">
+
+    <label class="auth-label">Correo:</label>
+    <input class="auth-input" type="email">
+
+    <label class="auth-label">Contraseña:</label>
+    <input class="auth-input" type="password">
+
+    <div class="role-grid">
+        <div class="role-option active">
+            <i class="fa-regular fa-file-lines"></i>
+            <div style="margin-top:8px;">Capturista</div>
+        </div>
+        <div class="role-option">
+            <i class="fa-solid fa-shield-halved"></i>
+            <div style="margin-top:8px;">Administrador</div>
+        </div>
+    </div>
+
+    <button class="btn-primary" style="width:100%;">Registrar</button>
+</div>
+{% endblock %}

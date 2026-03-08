@@ -1,0 +1,28 @@
+{% extends "base_auth.html" %}
+
+{% block title %}Verificar código{% endblock %}
+
+{% block content %}
+<div class="auth-card auth-mini-card">
+    <div class="auth-mini-icon">
+        <i class="fa-solid fa-check"></i>
+    </div>
+
+    <p class="auth-mini-text" style="margin-bottom: 12px;">
+        Hemos enviado un correo con un código de verificación, por favor introdúcelo para el cambio de tu contraseña.
+    </p>
+
+    <div class="code-boxes">
+        <input class="code-input" type="text" maxlength="1">
+        <input class="code-input" type="text" maxlength="1">
+        <input class="code-input" type="text" maxlength="1">
+        <input class="code-input" type="text" maxlength="1">
+        <input class="code-input" type="text" maxlength="1">
+        <input class="code-input" type="text" maxlength="1">
+    </div>
+
+    <a href="{{ url_for('cambiar_password') }}">
+        <button class="btn-primary" style="min-width: 150px;">Siguiente</button>
+    </a>
+</div>
+{% endblock %}
