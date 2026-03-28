@@ -1,62 +1,40 @@
-@extends('layouts.app')
+@extends('layouts.auth')
+
+@section('title', 'Login - ActiScan')
 
 @section('content')
+    <div class="auth-card login-card">
+        <div class="login-left">
+            <div class="logo-mark">
+                <div class="logo-square">A</div>
+                <div class="logo-square">&diams;</div>
+                <div class="logo-square">S</div>
+                <div class="logo-square icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+            </div>
+            <h1 class="logo-title">ActiScan</h1>
+            <p class="logo-subtitle">GESTION DE ACTIVOS</p>
+        </div>
 
-<div class="row justify-content-center">
+        <div class="login-right">
+            <div class="auth-icon-circle">
+                <i class="fa-regular fa-user"></i>
+            </div>
 
-<div class="col-md-10">
+            <h1 class="auth-title">Bienvenido</h1>
+            <p class="auth-subtitle">Iniciar sesi&oacute;n</p>
 
-<div class="login-card">
+            <form>
+                <label class="auth-label" for="legacy_user">Usuario</label>
+                <input class="auth-input" id="legacy_user" type="text">
 
-<div class="row align-items-center">
+                <label class="auth-label" for="legacy_password">Contrase&ntilde;a</label>
+                <input class="auth-input" id="legacy_password" type="password">
 
-<!-- LOGO -->
-<div class="col-md-6 text-center">
-
-<img src="/img/actiscan.png" width="350">
-
-</div>
-
-<!-- FORM -->
-<div class="col-md-6">
-
-<div class="text-center mb-4">
-
-<img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" width="80">
-
-<h4 class="mt-2">Bienvenido</h4>
-<p>Iniciar sesión</p>
-
-</div>
-
-<div class="mb-3">
-<label>Usuario</label>
-<input type="text" class="form-control input-custom">
-</div>
-
-<div class="mb-3">
-<label>Contraseña</label>
-<input type="password" class="form-control input-custom">
-</div>
-
-<a href="#" class="small">Olvide contraseña</a>
-
-<div class="text-center mt-3">
-
-<button class="btn btn-secondary px-4">
-Entrar
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
+                <div class="auth-row">
+                    <a class="auth-link" href="{{ route('forgot.password') }}">Olvid&eacute; contrase&ntilde;a</a>
+                    <a class="btn-primary" href="{{ route('capturist.dashboard') }}">Entrar</a>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection

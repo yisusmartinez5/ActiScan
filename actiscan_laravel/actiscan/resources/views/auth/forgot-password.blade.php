@@ -1,44 +1,24 @@
-@extends('layouts.app')
+@extends('layouts.auth')
+
+@section('title', 'Recuperar contrase&ntilde;a')
 
 @section('content')
-<div class="topbar">
-    <div class="brand-box">
-        <img src="{{ asset('img/favicon-actiscan.png') }}" alt="ActiScan icon" class="brand-icon">
-        <div class="brand-text">
-            <h1>ActiScan</h1>
-            <p>Gestion de Activos</p>
+    <div class="auth-card auth-mini-card">
+        <div class="auth-mini-icon">
+            <i class="fa-solid fa-arrow-rotate-left"></i>
+        </div>
+
+        <h1 class="auth-mini-title">&iquest;Olvidaste tu contrase&ntilde;a?</h1>
+        <p class="auth-mini-text">
+            Introduce tu correo de la empresa para enviarte un c&oacute;digo de seguridad.
+        </p>
+
+        <label class="auth-label" for="email" style="text-align: left;">Email</label>
+        <input class="auth-input" id="email" type="email" placeholder="ejemplo@empresa.com">
+
+        <div class="auth-actions">
+            <a class="btn-secondary" href="{{ route('login') }}">Regresar</a>
+            <a class="btn-primary" href="{{ route('verification.code') }}">Continuar</a>
         </div>
     </div>
-</div>
-
-<div class="main-wrapper">
-    <div class="forgot-card">
-        <div class="forgot-content">
-
-            <div class="forgot-icon-box">
-                <img src="{{ asset('img/forgot-password-icon.png') }}" alt="Forgot Password Icon" class="forgot-icon">
-            </div>
-
-            <h2 class="forgot-title">¿Olvidaste tu contraseña?</h2>
-
-            <p class="forgot-text">
-                Introduce tu correo de la empresa para enviarte un<br>
-                código de seguridad
-            </p>
-
-            <form>
-                <div class="forgot-form-row">
-                    <label for="email" class="forgot-label">Email:</label>
-                    <input type="email" id="email" class="form-control forgot-input">
-                </div>
-
-                <div class="forgot-buttons">
-                    <a href="{{ route('verification.code') }}" class="btn action-btn">Continuar</a>
-                    <a href="{{ route('login') }}" class="btn action-btn return-btn">Regresar</a>
-                </div>
-            </form>
-
-        </div>
-    </div>
-</div>
 @endsection

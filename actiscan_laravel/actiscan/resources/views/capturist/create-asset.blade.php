@@ -1,166 +1,82 @@
-@extends('layouts.app')
+@extends('layouts.capturist')
+
+@section('title', 'Nuevo Activo')
+@section('nav_assets', 'active')
 
 @section('content')
-<div class="dashboard-page">
-
-    <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-menu">
-            <a href="{{ route('capturist.dashboard') }}" class="sidebar-btn">Dashboard</a>
-            <a href="{{ route('capturist.assets') }}" class="sidebar-btn active">Activos</a>
-            <a href="{{ route('capturist.categories') }}" class="sidebar-btn">Categoría Activos</a>
-            <a href="{{ route('login') }}" class="sidebar-btn">Cerrar sesión</a>
+    <div class="page-toolbar">
+        <div>
+            <h1 class="page-title">Nuevo activo</h1>
+            <p class="page-subtitle">Registrar un nuevo elemento en el inventario conservando el flujo actual.</p>
         </div>
-    </aside>
 
-    <!-- Overlay -->
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        <a class="ghost-button" href="{{ route('capturist.assets') }}">Volver</a>
+    </div>
 
-    <!-- Header -->
-    <header class="dashboard-header">
-        <div class="header-left">
-            <button class="menu-toggle" id="menuToggle" type="button" aria-label="Abrir menú">
-                <span></span>
-                <span></span>
-                <span></span>
+    <div class="content-card">
+        <div class="split-card">
+            <button class="photo-box" type="button">
+                <i class="fa-regular fa-image"></i>
+                <strong>Agregar foto</strong>
+                <span>Selecciona una imagen de referencia para el activo.</span>
             </button>
-        </div>
 
-        <div class="header-center">
-            <div class="brand-box">
-                <img src="{{ asset('img/favicon-actiscan.png') }}" alt="ActiScan icon" class="brand-icon">
-                <div class="brand-text">
-                    <h1>ActiScan</h1>
-                    <p>Gestión de Activos</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="header-right">
-            <div class="user-pill">
-                <div class="user-avatar">GM</div>
-                <span class="user-name">Gael Jesus Martinez</span>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main -->
-    <main class="dashboard-main create-asset-main">
-        <div class="create-asset-container">
-
-            <div class="create-asset-topbar">
-                <a href="{{ route('capturist.assets') }}" class="asset-back-btn">Volver</a>
-            </div>
-
-            <section class="create-asset-card">
-                <div class="row g-4 align-items-start">
-
-                    <!-- Cargar foto -->
-                    <div class="col-lg-4">
-                        <div class="photo-upload-panel">
-                            <button type="button" class="photo-upload-box">
-                                <span class="photo-upload-icon">
-                                    <img src="{{ asset('img/photo-upload-icon.png') }}" alt="Upload Icon" class="photo-upload-img">
-                                </span>
-                                <span class="photo-upload-text">Agregar foto</span>
-                            </button>
-                        </div>
+            <form>
+                <div class="form-grid">
+                    <div class="full-width">
+                        <label class="form-label-block" for="asset_name">Nombre</label>
+                        <input class="auth-input" id="asset_name" type="text">
                     </div>
 
-                    <!-- Formulario -->
-                    <div class="col-lg-8">
-                        <form class="create-asset-form">
-                            <div class="row g-3">
-
-                                <div class="col-12">
-                                    <label class="floating-label">Nombre:</label>
-                                    <input type="text" class="create-asset-input">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="floating-label">No. Serial:</label>
-                                    <input type="text" class="create-asset-input">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="floating-label">Marca:</label>
-                                    <div class="select-wrapper">
-                                        <select class="create-asset-select">
-                                            <option selected disabled>Selecciona una marca</option>
-                                            <option>ASUS</option>
-                                            <option>Dell</option>
-                                            <option>HP</option>
-                                            <option>Lenovo</option>
-                                            <option>Acer</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="floating-label">Categoría:</label>
-                                    <div class="select-wrapper">
-                                        <select class="create-asset-select">
-                                            <option selected disabled>Selecciona una categoría</option>
-                                            <option>Computadora</option>
-                                            <option>Servidor</option>
-                                            <option>Red</option>
-                                            <option>Móvil</option>
-                                            <option>Impresora</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="floating-label">Estado:</label>
-                                    <div class="select-wrapper">
-                                        <select class="create-asset-select">
-                                            <option selected disabled>Selecciona un estado</option>
-                                            <option>Operacional</option>
-                                            <option>Mantenimiento</option>
-                                            <option>Baja</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="floating-label">Ubicación:</label>
-                                    <input type="text" class="create-asset-input">
-                                </div>
-
-                            </div>
-
-                            <div class="create-asset-actions">
-                                <a href="{{ route('capturist.assets') }}" class="btn create-asset-btn">
-                                    Agregar activo
-                                </a>
-                            </div>
-                        </form>
+                    <div>
+                        <label class="form-label-block" for="asset_serial">No. serial</label>
+                        <input class="auth-input" id="asset_serial" type="text">
                     </div>
 
+                    <div>
+                        <label class="form-label-block" for="asset_brand">Marca</label>
+                        <select class="auth-select" id="asset_brand">
+                            <option selected disabled>Selecciona una marca</option>
+                            <option>ASUS</option>
+                            <option>Dell</option>
+                            <option>HP</option>
+                            <option>Lenovo</option>
+                            <option>Acer</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="form-label-block" for="asset_category">Categoria</label>
+                        <select class="auth-select" id="asset_category">
+                            <option selected disabled>Selecciona una categoria</option>
+                            <option>Computadora</option>
+                            <option>Servidor</option>
+                            <option>Red</option>
+                            <option>Movil</option>
+                            <option>Impresora</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="form-label-block" for="asset_status">Estado</label>
+                        <select class="auth-select" id="asset_status">
+                            <option selected disabled>Selecciona un estado</option>
+                            <option>Operacional</option>
+                            <option>Mantenimiento</option>
+                            <option>Baja</option>
+                        </select>
+                    </div>
+
+                    <div class="full-width">
+                        <label class="form-label-block" for="asset_location">Ubicacion</label>
+                        <input class="auth-input" id="asset_location" type="text">
+                    </div>
                 </div>
-            </section>
 
+                <div class="form-actions">
+                    <a class="soft-button" href="{{ route('capturist.assets') }}">Agregar activo</a>
+                </div>
+            </form>
         </div>
-    </main>
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const menuToggle = document.getElementById('menuToggle');
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('sidebarOverlay');
-
-        if (menuToggle && sidebar && overlay) {
-            menuToggle.addEventListener('click', function () {
-                sidebar.classList.toggle('open');
-                overlay.classList.toggle('show');
-            });
-
-            overlay.addEventListener('click', function () {
-                sidebar.classList.remove('open');
-                overlay.classList.remove('show');
-            });
-        }
-    });
-</script>
+    </div>
 @endsection

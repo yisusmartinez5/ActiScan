@@ -1,45 +1,26 @@
-@extends('layouts.app')
+@extends('layouts.auth')
+
+@section('title', 'Verificar codigo')
 
 @section('content')
-<div class="topbar">
-    <div class="brand-box">
-        <img src="{{ asset('img/favicon-actiscan.png') }}" alt="ActiScan icon" class="brand-icon">
-        <div class="brand-text">
-            <h1>ActiScan</h1>
-            <p>Gestion de Activos</p>
+    <div class="auth-card auth-mini-card">
+        <div class="auth-mini-icon">
+            <i class="fa-solid fa-check"></i>
         </div>
-    </div>
-</div>
 
-<div class="main-wrapper">
-    <div class="verification-card">
-        <div class="verification-content">
+        <p class="auth-mini-text" style="margin-bottom: 12px;">
+            Hemos enviado un correo con un c&oacute;digo de verificaci&oacute;n. Introd&uacute;celo para continuar con el cambio de contrase&ntilde;a.
+        </p>
 
-            <div class="verification-icon">
-                <img src="{{ asset('img/verification-icon.png') }}" alt="Verification Icon">
-            </div>
-
-            <form>
-                <div class="code-inputs">
-                    <input type="text" maxlength="1" class="code-box">
-                    <input type="text" maxlength="1" class="code-box">
-                    <input type="text" maxlength="1" class="code-box">
-                    <input type="text" maxlength="1" class="code-box">
-                    <input type="text" maxlength="1" class="code-box">
-                    <input type="text" maxlength="1" class="code-box">
-                </div>
-
-                <p class="verification-text">
-                    Hemos enviado un correo con un código de verificación por favor<br>
-                    introducelo para el cambio de tu contraseña
-                </p>
-
-                <div class="verification-button-wrapper">
-                    <a href="{{ route('reset.password') }}" class="btn next-btn">Siguiente</a>
-                </div>
-            </form>
-
+        <div class="code-boxes">
+            <input class="code-input" type="text" maxlength="1">
+            <input class="code-input" type="text" maxlength="1">
+            <input class="code-input" type="text" maxlength="1">
+            <input class="code-input" type="text" maxlength="1">
+            <input class="code-input" type="text" maxlength="1">
+            <input class="code-input" type="text" maxlength="1">
         </div>
+
+        <a class="btn-primary" href="{{ route('reset.password') }}" style="min-width: 150px;">Siguiente</a>
     </div>
-</div>
 @endsection
