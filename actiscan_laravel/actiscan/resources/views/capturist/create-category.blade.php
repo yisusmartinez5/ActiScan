@@ -1,6 +1,7 @@
 @extends('layouts.capturist')
 
 @section('title', 'Nueva Categoria')
+@section('page', 'create-category')
 @section('nav_categories', 'active')
 
 @section('content')
@@ -8,7 +9,7 @@
     <p class="page-subtitle">Crear una nueva categoria de activos fijos.</p>
 
     <div class="content-card">
-        <form>
+        <form id="createCategoryForm">
             <div class="form-grid">
                 <div>
                     <label class="form-label-block" for="category_name">Nombre de la categoria</label>
@@ -60,8 +61,9 @@
 
             <div class="form-actions">
                 <a class="ghost-button" href="{{ route('capturist.categories') }}">Cancelar</a>
-                <a class="soft-button" href="{{ route('capturist.categories') }}">Crear categoria</a>
+                <button class="soft-button" type="submit">Crear categoria</button>
             </div>
+            <p id="createCategoryMessage" class="page-subtitle" style="margin-top: 12px; margin-bottom: 0;"></p>
         </form>
     </div>
 @endsection

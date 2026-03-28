@@ -1,0 +1,13 @@
+services:
+  fastapi:
+    build:
+      context: ..
+      dockerfile: actiscan_fastapi/dockerfile
+    container_name: actiscan_fastapi
+    ports:
+      - "8001:8001"
+    environment:
+      - "ACTISCAN_SQL_DUMP=/app/actiscan (1).sql"
+      - ACTISCAN_DB_PATH=/app/data/actiscan.db
+    volumes:
+      - ./data:/app/data

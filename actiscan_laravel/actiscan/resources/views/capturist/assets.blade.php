@@ -1,6 +1,7 @@
 @extends('layouts.capturist')
 
 @section('title', 'Inventario de Activos')
+@section('page', 'assets')
 @section('nav_assets', 'active')
 
 @section('content')
@@ -18,8 +19,8 @@
 
     <div class="table-card">
         <div class="table-tools compact">
-            <input class="auth-input" type="text" placeholder="Filtrar por nombre, serie o IP..." style="margin: 0;">
-            <button class="filter-btn" type="button">Filtros avanzados</button>
+            <input class="auth-input" id="assetsSearchInput" type="text" placeholder="Filtrar por nombre, serie o IP..." style="margin: 0;">
+            <button class="filter-btn" id="assetsSearchButton" type="button">Aplicar filtro</button>
         </div>
 
         <table class="simple-table">
@@ -32,60 +33,7 @@
                     <th>Opciones</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <div class="asset-name">Laptop Asus ROG</div>
-                        <div class="asset-code">AST0001</div>
-                    </td>
-                    <td><span class="badge-soft">Computadora</span></td>
-                    <td>
-                        <span class="status-text success">
-                            <span class="status-dot"></span>
-                            OPERACIONAL
-                        </span>
-                    </td>
-                    <td>C-207</td>
-                    <td class="option-icons">
-                        <a href="{{ route('capturist.assets.show') }}" title="Ver activo"><i class="fa-regular fa-eye"></i></a>
-                        <a href="{{ route('capturist.assets.qr') }}" title="QR"><i class="fa-solid fa-qrcode"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="asset-name">Laptop Dell XPS</div>
-                        <div class="asset-code">AST0002</div>
-                    </td>
-                    <td><span class="badge-soft">Computadora</span></td>
-                    <td>
-                        <span class="status-text success">
-                            <span class="status-dot"></span>
-                            OPERACIONAL
-                        </span>
-                    </td>
-                    <td>B-207</td>
-                    <td class="option-icons">
-                        <a href="{{ route('capturist.assets.show') }}" title="Ver activo"><i class="fa-regular fa-eye"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="asset-name">Laptop MSI</div>
-                        <div class="asset-code">AST0003</div>
-                    </td>
-                    <td><span class="badge-soft">Computadora</span></td>
-                    <td>
-                        <span class="status-text warning">
-                            <span class="status-dot"></span>
-                            MANTENIMIENTO
-                        </span>
-                    </td>
-                    <td>A-207</td>
-                    <td class="option-icons">
-                        <a href="{{ route('capturist.assets.show') }}" title="Ver activo"><i class="fa-regular fa-eye"></i></a>
-                    </td>
-                </tr>
-            </tbody>
+            <tbody id="assetsTableBody"></tbody>
         </table>
     </div>
 @endsection

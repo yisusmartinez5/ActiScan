@@ -1,6 +1,7 @@
 @extends('layouts.capturist')
 
 @section('title', 'Dashboard')
+@section('page', 'dashboard')
 @section('nav_dashboard', 'active')
 
 @section('content')
@@ -10,15 +11,15 @@
     <div class="stats-grid">
         <div class="stat-card">
             <div class="stat-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
-            <div class="stat-title">Total de activos</div>
+            <div class="stat-title"><span id="dashboardTotalAssets">0</span> Total de activos</div>
         </div>
         <div class="stat-card">
             <div class="stat-icon"><i class="fa-solid fa-circle-info"></i></div>
-            <div class="stat-title">Activos con observaciones</div>
+            <div class="stat-title"><span id="dashboardAssetsObs">0</span> Activos con observaciones</div>
         </div>
         <div class="stat-card">
             <div class="stat-icon"><i class="fa-solid fa-qrcode"></i></div>
-            <div class="stat-title">Etiquetas listas para imprimir</div>
+            <div class="stat-title"><span id="dashboardCategories">0</span> Categorias activas</div>
         </div>
     </div>
 
@@ -30,14 +31,14 @@
 
     <div class="table-card">
         <div class="table-tools">
-            <input class="auth-input" type="text" placeholder="Buscar producto..." style="margin: 0;">
-            <select class="auth-select">
+            <input class="auth-input" id="dashboardSearchInput" type="text" placeholder="Buscar producto..." style="margin: 0;">
+            <select class="auth-select" id="dashboardCategoryFilter">
                 <option>Categoria</option>
             </select>
-            <select class="auth-select">
+            <select class="auth-select" id="dashboardStatusFilter">
                 <option>Todo</option>
             </select>
-            <button class="btn-primary" type="button">Aplicar filtro</button>
+            <button class="btn-primary" type="button" id="dashboardApplyFilter">Aplicar filtro</button>
         </div>
 
         <table class="simple-table">
@@ -50,36 +51,7 @@
                     <th>Accion</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>DR-030</td>
-                    <td>02/10/2025</td>
-                    <td>Enviado</td>
-                    <td>5</td>
-                    <td class="option-icons">
-                        <a href="{{ route('capturist.assets.show') }}" title="Ver activo"><i class="fa-regular fa-eye"></i></a>
-                        <a href="{{ route('capturist.assets.qr') }}" title="Generar QR"><i class="fa-solid fa-qrcode"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>DR-029</td>
-                    <td>28/09/2025</td>
-                    <td>Surtido</td>
-                    <td>3</td>
-                    <td class="option-icons">
-                        <a href="{{ route('capturist.assets') }}" title="Ver listado"><i class="fa-regular fa-eye"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>DR-028</td>
-                    <td>25/09/2025</td>
-                    <td>Recibido</td>
-                    <td>4</td>
-                    <td class="option-icons">
-                        <a href="{{ route('capturist.assets') }}" title="Ver listado"><i class="fa-regular fa-eye"></i></a>
-                    </td>
-                </tr>
-            </tbody>
+            <tbody id="dashboardAssetsTableBody"></tbody>
         </table>
     </div>
 @endsection

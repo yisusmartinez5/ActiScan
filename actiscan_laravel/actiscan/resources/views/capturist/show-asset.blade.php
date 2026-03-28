@@ -1,6 +1,7 @@
 @extends('layouts.capturist')
 
 @section('title', 'Detalles del Activo')
+@section('page', 'show-asset')
 @section('nav_assets', 'active')
 
 @section('content')
@@ -16,17 +17,10 @@
     <div class="content-card">
         <div class="detail-grid">
             <div>
-                <div class="detail-list">
-                    <div class="detail-item"><strong>Nombre:</strong> Laptop Asus ROG</div>
-                    <div class="detail-item"><strong>No. serial:</strong> AST0001</div>
-                    <div class="detail-item"><strong>Marca:</strong> ASUS</div>
-                    <div class="detail-item"><strong>Categoria:</strong> Computadora</div>
-                    <div class="detail-item"><strong>Estado:</strong> Operacional</div>
-                    <div class="detail-item"><strong>Ubicacion:</strong> B-207</div>
-                </div>
+                <div class="detail-list" id="assetDetailList"></div>
 
                 <div class="quick-actions" style="margin-top: 24px; margin-bottom: 0;">
-                    <a class="soft-button" href="{{ route('capturist.assets.qr') }}">
+                    <a class="soft-button" id="assetQrLink" href="{{ route('capturist.assets.qr') }}">
                         <i class="fa-solid fa-qrcode"></i>
                         <span>Generar QR</span>
                     </a>
@@ -36,8 +30,8 @@
             <div class="preview-box dark">
                 <div class="preview-placeholder" style="color: #d6dee5;">
                     <i class="fa-solid fa-laptop"></i>
-                    <p>Vista del activo</p>
-                    <small>Imagen o referencia visual del equipo</small>
+                    <p id="assetPreviewTitle">Vista del activo</p>
+                    <small id="assetPreviewSubtitle">Imagen o referencia visual del equipo</small>
                 </div>
             </div>
         </div>

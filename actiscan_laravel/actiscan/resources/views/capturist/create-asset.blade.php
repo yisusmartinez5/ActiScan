@@ -1,6 +1,7 @@
 @extends('layouts.capturist')
 
 @section('title', 'Nuevo Activo')
+@section('page', 'create-asset')
 @section('nav_assets', 'active')
 
 @section('content')
@@ -21,7 +22,7 @@
                 <span>Selecciona una imagen de referencia para el activo.</span>
             </button>
 
-            <form>
+            <form id="createAssetForm">
                 <div class="form-grid">
                     <div class="full-width">
                         <label class="form-label-block" for="asset_name">Nombre</label>
@@ -36,46 +37,41 @@
                     <div>
                         <label class="form-label-block" for="asset_brand">Marca</label>
                         <select class="auth-select" id="asset_brand">
-                            <option selected disabled>Selecciona una marca</option>
-                            <option>ASUS</option>
-                            <option>Dell</option>
-                            <option>HP</option>
-                            <option>Lenovo</option>
-                            <option>Acer</option>
+                            <option selected disabled value="">Selecciona una marca</option>
+                            <option value="ASUS">ASUS</option>
+                            <option value="Dell">Dell</option>
+                            <option value="HP">HP</option>
+                            <option value="Lenovo">Lenovo</option>
+                            <option value="Acer">Acer</option>
                         </select>
                     </div>
 
                     <div>
                         <label class="form-label-block" for="asset_category">Categoria</label>
-                        <select class="auth-select" id="asset_category">
-                            <option selected disabled>Selecciona una categoria</option>
-                            <option>Computadora</option>
-                            <option>Servidor</option>
-                            <option>Red</option>
-                            <option>Movil</option>
-                            <option>Impresora</option>
+                        <select class="auth-select" id="asset_category" required>
+                            <option selected disabled value="">Selecciona una categoria</option>
                         </select>
                     </div>
 
                     <div>
                         <label class="form-label-block" for="asset_status">Estado</label>
-                        <select class="auth-select" id="asset_status">
-                            <option selected disabled>Selecciona un estado</option>
-                            <option>Operacional</option>
-                            <option>Mantenimiento</option>
-                            <option>Baja</option>
+                        <select class="auth-select" id="asset_status" required>
+                            <option selected disabled value="">Selecciona un estado</option>
                         </select>
                     </div>
 
                     <div class="full-width">
                         <label class="form-label-block" for="asset_location">Ubicacion</label>
-                        <input class="auth-input" id="asset_location" type="text">
+                        <select class="auth-select" id="asset_location" required>
+                            <option selected disabled value="">Selecciona una ubicacion</option>
+                        </select>
                     </div>
                 </div>
 
                 <div class="form-actions">
-                    <a class="soft-button" href="{{ route('capturist.assets') }}">Agregar activo</a>
+                    <button class="soft-button" type="submit">Agregar activo</button>
                 </div>
+                <p id="createAssetMessage" class="page-subtitle" style="margin-top: 12px; margin-bottom: 0;"></p>
             </form>
         </div>
     </div>

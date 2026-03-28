@@ -1,6 +1,7 @@
 @extends('layouts.capturist')
 
 @section('title', 'Generar QR')
+@section('page', 'generate-qr')
 @section('nav_assets', 'active')
 
 @section('content')
@@ -31,7 +32,7 @@
                 </div>
 
                 <div class="quick-actions" style="margin-top: 24px; margin-bottom: 0;">
-                    <a class="soft-button" href="#"><i class="fa-solid fa-print"></i><span>Imprimir ahora</span></a>
+                    <button class="soft-button" id="generateQrButton" type="button"><i class="fa-solid fa-print"></i><span>Generar QR</span></button>
                 </div>
             </div>
 
@@ -54,9 +55,9 @@
                     </div>
 
                     <div class="qr-preview-text">
-                        <h4>LAPTOP ASUS ROG</h4>
-                        <h5>AST0001</h5>
-                        <p>SN: SN-99283 &nbsp;&nbsp;&nbsp; LOC: C-207</p>
+                        <h4 id="qrPreviewName">ACTIVO</h4>
+                        <h5 id="qrPreviewCode">CODIGO</h5>
+                        <p id="qrPreviewMeta">SERIE Y UBICACION</p>
                     </div>
                 </div>
 
@@ -64,4 +65,5 @@
             </div>
         </div>
     </div>
+    <p id="generateQrMessage" class="page-subtitle" style="margin-top: 12px; margin-bottom: 0;"></p>
 @endsection

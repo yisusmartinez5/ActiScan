@@ -1,6 +1,7 @@
 @extends('layouts.auth')
 
 @section('title', 'Login - ActiScan')
+@section('page', 'login')
 
 @section('content')
     <div class="auth-card login-card">
@@ -23,7 +24,7 @@
             <h1 class="auth-title">Bienvenido</h1>
             <p class="auth-subtitle">Iniciar sesi&oacute;n</p>
 
-            <form>
+            <form id="loginForm">
                 <label class="auth-label" for="usuario">Usuario</label>
                 <input class="auth-input" id="usuario" type="text" value="admin@actiscan.com">
 
@@ -32,8 +33,9 @@
 
                 <div class="auth-row">
                     <a class="auth-link" href="{{ route('forgot.password') }}">Olvid&eacute; contrase&ntilde;a</a>
-                    <a class="btn-primary" href="{{ route('capturist.dashboard') }}">Entrar</a>
+                    <button class="btn-primary" type="submit" id="loginButton">Entrar</button>
                 </div>
+                <p id="loginMessage" class="page-subtitle" style="margin-top: 12px; margin-bottom: 0;"></p>
             </form>
         </div>
     </div>

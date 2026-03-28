@@ -1,6 +1,7 @@
 @extends('layouts.capturist')
 
 @section('title', 'Categorias de Activos')
+@section('page', 'categories')
 @section('nav_categories', 'active')
 
 @section('content')
@@ -18,8 +19,8 @@
 
     <div class="table-card">
         <div class="table-tools compact">
-            <input class="auth-input" type="text" placeholder="Filtrar por nombre o descripcion" style="margin: 0;">
-            <button class="filter-btn" type="button">Filtros avanzados</button>
+            <input class="auth-input" id="categoriesSearchInput" type="text" placeholder="Filtrar por nombre o descripcion" style="margin: 0;">
+            <button class="filter-btn" id="categoriesSearchButton" type="button">Aplicar filtro</button>
         </div>
 
         <table class="simple-table">
@@ -32,35 +33,7 @@
                     <th>Opciones</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td><i class="fa-solid fa-laptop"></i></td>
-                    <td><span class="badge-soft">Computadora</span></td>
-                    <td>Equipos de computo portatiles y de escritorio.</td>
-                    <td>55</td>
-                    <td class="option-icons">
-                        <a href="{{ route('capturist.categories.create') }}" title="Editar categoria"><i class="fa-regular fa-pen-to-square"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td><i class="fa-solid fa-server"></i></td>
-                    <td><span class="badge-soft">Servidor</span></td>
-                    <td>Servidores y equipos de almacenamiento.</td>
-                    <td>43</td>
-                    <td class="option-icons">
-                        <a href="{{ route('capturist.categories.create') }}" title="Editar categoria"><i class="fa-regular fa-pen-to-square"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td><i class="fa-solid fa-network-wired"></i></td>
-                    <td><span class="badge-soft">Red</span></td>
-                    <td>Equipos de networking y comunicaciones.</td>
-                    <td>22</td>
-                    <td class="option-icons">
-                        <a href="{{ route('capturist.categories.create') }}" title="Editar categoria"><i class="fa-regular fa-pen-to-square"></i></a>
-                    </td>
-                </tr>
-            </tbody>
+            <tbody id="categoriesTableBody"></tbody>
         </table>
     </div>
 @endsection
