@@ -4,5 +4,12 @@ services:
     container_name: actiscan_app
     ports:
       - "8000:8000"
+    environment:
+      - ACTISCAN_API_BASE=http://host.docker.internal:8001/api
+      - APP_KEY=base64:uH2IDZDdDNT3zk+kBy464eJz2dEVviHDiff4QiBP6Ec=
+      - SESSION_DRIVER=file
+      - CACHE_STORE=file
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - .:/appv

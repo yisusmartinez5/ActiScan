@@ -1,0 +1,63 @@
+{% extends "base_admin.html" %}
+
+{% block title %}Nueva Auditoria - ActiScan{% endblock %}
+{% block page %}crear-auditoria{% endblock %}
+{% block nav_auditoria %}active{% endblock %}
+
+{% block content %}
+<div class="form-page-center" style="max-width:860px;margin:0 auto;">
+    <div class="page-toolbar">
+        <div>
+            <h1 class="page-title" id="crearAuditoriaTitle">Nueva Auditoria</h1>
+            <p class="page-subtitle">Registrar una nueva inspeccion fisica de activos.</p>
+        </div>
+        <a href="{{ url_for('auditoria') }}" class="btn-secondary" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
+            Volver
+        </a>
+    </div>
+
+    <div class="content-card" style="max-width:620px;">
+        <form id="crearAuditoriaForm">
+            <div class="form-grid">
+                <div class="full-width">
+                    <label class="form-label-block">Activo auditado</label>
+                    <select class="auth-select" id="audit_activo" required>
+                        <option value="">Selecciona un activo</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label-block">Tipo de auditoria</label>
+                    <select class="auth-select" id="audit_tipo">
+                        <option value="fisica">Fisica</option>
+                        <option value="preventiva">Preventiva</option>
+                        <option value="correctiva">Correctiva</option>
+                        <option value="inventario">Inventario</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label-block">Resultado</label>
+                    <select class="auth-select" id="audit_resultado">
+                        <option value="satisfactorio">Satisfactorio</option>
+                        <option value="con_observaciones">Con observaciones</option>
+                        <option value="no_satisfactorio">No satisfactorio</option>
+                    </select>
+                </div>
+
+                <div class="full-width">
+                    <label class="form-label-block">Descripcion / Observaciones</label>
+                    <textarea class="auth-input" id="audit_descripcion" rows="4" placeholder="Describe los hallazgos de la auditoria..." style="height:auto;padding-top:12px;"></textarea>
+                </div>
+            </div>
+
+            <p id="crearAuditoriaMessage" style="font-size:.85rem;color:#e55;margin-top:10px;min-height:18px;"></p>
+
+            <div class="form-actions">
+                <a href="{{ url_for('auditoria') }}" class="btn-secondary" style="text-decoration:none;display:inline-flex;align-items:center;">Cancelar</a>
+                <button class="btn-primary" type="submit" id="crearAuditoriaBtn">Guardar auditoria</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

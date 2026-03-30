@@ -2,9 +2,11 @@ from __future__ import annotations
 
 import os
 import re
+from collections.abc import Iterator
 from pathlib import Path
 
 from sqlalchemy import create_engine, text
+from sqlalchemy.engine import Connection
 from sqlalchemy.engine import Engine
 
 
@@ -33,6 +35,12 @@ DATABASE_URL = f"sqlite:///{DB_PATH}"
 engine: Engine = create_engine(DATABASE_URL, future=True)
 
 
+def get_connection() -> Iterator[Connection]:
+    with engine.begin() as conn:
+        conn.execute(text("PRAGMA foreign_keys = ON"))
+        yield conn
+
+
 def _transform_sql_server_to_sqlite(statement: str) -> str:
     stmt = statement
     stmt = re.sub(r"\s+", " ", stmt).strip()
@@ -56,21 +64,103 @@ def _extract_table_statements(raw_sql: str) -> list[str]:
     return [_transform_sql_server_to_sqlite(stmt) for stmt in statements]
 
 
-def _seed_demo_data() -> None:
+def _ensure_runtime_extensions() -> None:
     with engine.begin() as conn:
-        has_users = conn.execute(text("SELECT COUNT(*) FROM usuarios")).scalar_one()
-        if has_users:
-            return
+        asset_columns = {
+            row["name"] for row in conn.execute(text("PRAGMA table_info(activos)")).mappings().all()
+        }
+        if "foto_base64" not in asset_columns:
+            conn.execute(text("ALTER TABLE activos ADD COLUMN foto_base64 TEXT"))
+
+        category_columns = {
+            row["name"] for row in conn.execute(text("PRAGMA table_info(categoria_activos)")).mappings().all()
+        }
+        if "icono" not in category_columns:
+            conn.execute(text("ALTER TABLE categoria_activos ADD COLUMN icono TEXT"))
+        if "color" not in category_columns:
+            conn.execute(text("ALTER TABLE categoria_activos ADD COLUMN color TEXT"))
 
         conn.execute(
             text(
                 """
-                INSERT INTO roles (nombre, descripcion) VALUES
-                ('Administrador', 'Control completo'),
-                ('Capturista', 'Registro de activos');
+                UPDATE categoria_activos
+                SET icono = COALESCE(icono, 'fa-solid fa-layer-group'),
+                    color = COALESCE(color, '#4a90e2')
                 """
             )
         )
+
+        conn.execute(
+            text(
+                """
+                CREATE TABLE IF NOT EXISTS auditorias (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    id_activo INTEGER NOT NULL,
+                    tipo TEXT NOT NULL,
+                    descripcion TEXT,
+                    resultado TEXT NOT NULL,
+                    fecha_auditoria TEXT DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY(id_activo) REFERENCES activos(id)
+                )
+                """
+            )
+        )
+
+
+def _seed_demo_data() -> None:
+    with engine.begin() as conn:
+        has_roles = conn.execute(text("SELECT COUNT(*) FROM roles")).scalar_one()
+        if not has_roles:
+            conn.execute(
+                text(
+                    """
+                    INSERT INTO roles (nombre, descripcion) VALUES
+                    ('Administrador', 'Control completo'),
+                    ('Capturista', 'Registro de activos');
+                    """
+                )
+            )
+
+        has_permisos = conn.execute(text("SELECT COUNT(*) FROM permisos")).scalar_one()
+        if not has_permisos:
+            conn.execute(
+                text(
+                    """
+                    INSERT INTO permisos (codigo, descripcion) VALUES
+                    ('ACTIVOS_VER', 'Permite consultar activos'),
+                    ('ACTIVOS_CREAR', 'Permite registrar activos'),
+                    ('USUARIOS_GESTION', 'Permite administrar usuarios');
+                    """
+                )
+            )
+
+        has_rol_permisos = conn.execute(text("SELECT COUNT(*) FROM rol_permisos")).scalar_one()
+        if not has_rol_permisos:
+            conn.execute(
+                text(
+                    """
+                    INSERT INTO rol_permisos (id_rol, id_permiso) VALUES
+                    (1, 1), (1, 2), (1, 3),
+                    (2, 1), (2, 2);
+                    """
+                )
+            )
+
+        has_users = conn.execute(text("SELECT COUNT(*) FROM usuarios")).scalar_one()
+        if has_users:
+            has_movement_types = conn.execute(text("SELECT COUNT(*) FROM tipo_movimientos")).scalar_one()
+            if not has_movement_types:
+                conn.execute(
+                    text(
+                        """
+                        INSERT INTO tipo_movimientos (nombre, descripcion) VALUES
+                        ('Alta', 'Registro inicial del activo'),
+                        ('Cambio de ubicacion', 'Traslado interno de activo'),
+                        ('Baja', 'Retiro o desincorporacion de activo');
+                        """
+                    )
+                )
+            return
 
         conn.execute(
             text(
@@ -128,6 +218,17 @@ def _seed_demo_data() -> None:
             )
         )
 
+        conn.execute(
+            text(
+                """
+                INSERT INTO tipo_movimientos (nombre, descripcion) VALUES
+                ('Alta', 'Registro inicial del activo'),
+                ('Cambio de ubicacion', 'Traslado interno de activo'),
+                ('Baja', 'Retiro o desincorporacion de activo');
+                """
+            )
+        )
+
 
 def init_db() -> None:
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -139,5 +240,7 @@ def init_db() -> None:
         conn.execute(text("PRAGMA foreign_keys = ON"))
         for stmt in table_statements:
             conn.execute(text(stmt))
+
+    _ensure_runtime_extensions()
 
     _seed_demo_data()

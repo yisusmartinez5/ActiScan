@@ -1,18 +1,19 @@
 {% extends "base_auth.html" %}
 
 {% block title %}Login - ActiScan{% endblock %}
+{% block page %}login{% endblock %}
 
 {% block content %}
 <div class="auth-card login-card">
     <div class="login-left">
         <div class="logo-mark">
             <div class="logo-square">A</div>
-            <div class="logo-square">▦</div>
+            <div class="logo-square">&#9638;</div>
             <div class="logo-square">S</div>
             <div class="logo-square icon"><i class="fa-solid fa-magnifying-glass"></i></div>
         </div>
         <h1 class="logo-title">ActiScan</h1>
-        <p class="logo-subtitle">GESTIÓN DE ACTIVOS</p>
+        <p class="logo-subtitle">GESTION DE ACTIVOS</p>
     </div>
 
     <div class="login-right">
@@ -21,19 +22,19 @@
         </div>
 
         <h1 class="auth-title">Bienvenido</h1>
-        <p class="auth-subtitle">Iniciar sesión</p>
+        <p class="auth-subtitle">Iniciar sesion</p>
 
-        <label class="auth-label">Usuario</label>
-        <input class="auth-input" type="text" value="admin@actiscan.com">
+        <label class="auth-label">Correo</label>
+        <input class="auth-input" id="loginEmail" type="email" value="admin@actiscan.com">
 
-        <label class="auth-label">Contraseña</label>
-        <input class="auth-input" type="password" value="123456">
+        <label class="auth-label">Contrasena</label>
+        <input class="auth-input" id="loginPass" type="password" value="123456">
+
+        <p id="loginMessage" style="font-size:.82rem;color:#e55;min-height:18px;margin-bottom:6px;"></p>
 
         <div class="auth-row">
-            <a class="auth-link" href="{{ url_for('recuperar_password') }}">Olvidé contraseña</a>
-            <a href="{{ url_for('dashboard') }}">
-                <button class="btn-primary">Entrar</button>
-            </a>
+            <a class="auth-link" href="{{ url_for('recuperar_password') }}">Olvide contrasena</a>
+            <button class="btn-primary" id="loginBtn" type="button">Entrar</button>
         </div>
     </div>
 </div>

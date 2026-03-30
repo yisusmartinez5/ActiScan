@@ -667,3 +667,304 @@ a {
 .menu-icon i {
     pointer-events: none;
 }
+
+/* ── Utilities ─────────────────────────────────────────────── */
+.page-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.form-page-center {
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+.form-page-center .content-card {
+    margin: 0 auto;
+}
+
+/* Centrado dedicado para vistas de creacion en Admin */
+.admin-body[data-page="crear-activo"] .panel-content,
+.admin-body[data-page="crear-auditoria"] .panel-content {
+    display: flex;
+    justify-content: center;
+}
+
+.admin-body[data-page="crear-activo"] .form-page-center,
+.admin-body[data-page="crear-auditoria"] .form-page-center {
+    width: min(100%, 760px);
+    max-width: 760px;
+}
+
+.admin-body[data-page="crear-activo"] .form-page-center .page-toolbar,
+.admin-body[data-page="crear-auditoria"] .form-page-center .page-toolbar {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+}
+
+.admin-body[data-page="crear-activo"] .form-page-center .page-subtitle,
+.admin-body[data-page="crear-auditoria"] .form-page-center .page-subtitle {
+    margin-bottom: 0;
+}
+
+.auth-select {
+    width: 100%;
+    height: 48px;
+    border: 2px solid #ececec;
+    border-radius: 10px;
+    padding: 0 14px;
+    outline: none;
+    color: #6a7280;
+    background: #fff;
+    cursor: pointer;
+}
+
+.badge-soft {
+    background: #f0f4f8;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: .82rem;
+    color: #31465c;
+}
+
+.icon-btn {
+    background: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    color: #8ea6ba;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-btn:hover {
+    background: #e8f0f7;
+    color: #31465c;
+}
+
+.stat-sub {
+    font-size: .78rem;
+    color: #a3acb2;
+    margin-top: 4px;
+}
+
+.stat-link {
+    cursor: pointer;
+    transition: box-shadow .2s;
+}
+
+.stat-link:hover {
+    box-shadow: 0 6px 20px rgba(0,0,0,.12);
+}
+
+/* ── Dropdown button ───────────────────────────────────────── */
+.dropdown-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 6px);
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 24px rgba(0,0,0,.13);
+    min-width: 170px;
+    z-index: 200;
+    overflow: hidden;
+}
+
+.dropdown-menu.open {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    color: #31465c;
+    font-size: .9rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background: #f2efe8;
+}
+
+/* ── Forms ─────────────────────────────────────────────────── */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-label-block {
+    display: block;
+    font-size: .75rem;
+    font-weight: 700;
+    color: #9ea5ac;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.btn-secondary {
+    border: 1px solid #dfe3e8;
+    background: #ffffff;
+    color: #31465c;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 12px 22px;
+    cursor: pointer;
+}
+
+/* ── Toast ─────────────────────────────────────────────────── */
+.actiscan-toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: .9rem;
+    font-weight: 600;
+    z-index: 9999;
+    max-width: 340px;
+    box-shadow: 0 4px 18px rgba(0,0,0,.15);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .35s;
+}
+
+.actiscan-toast.show {
+    opacity: 1;
+}
+
+/* ── QR Modal ─────────────────────────────────────────────── */
+.qr-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10020;
+}
+
+.qr-modal.open {
+    display: block;
+}
+
+.qr-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .45);
+}
+
+.qr-modal-card {
+    position: relative;
+    width: min(92vw, 520px);
+    margin: 9vh auto 0;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, .25);
+    overflow: hidden;
+}
+
+.qr-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    border-bottom: 1px solid #e8edf2;
+}
+
+.qr-modal-header h3 {
+    margin: 0;
+    color: #23456b;
+}
+
+.qr-modal-body {
+    padding: 18px;
+}
+
+.qr-modal-asset {
+    font-size: .95rem;
+    color: #56708a;
+    margin-bottom: 8px;
+}
+
+.qr-visual-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 8px 0 12px;
+}
+
+.qr-visual {
+    width: 196px;
+    height: 196px;
+    background: #fff;
+    border: 2px dashed #9fbad1;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: #6b86a0;
+    font-size: .85rem;
+    text-align: center;
+    padding: 8px;
+}
+
+.qr-visual canvas,
+.qr-visual img {
+    width: 180px;
+    height: 180px;
+}
+
+.qr-modal-value {
+    background: #f4f8fb;
+    border: 1px solid #dbe7f1;
+    border-radius: 10px;
+    padding: 12px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color: #23456b;
+    word-break: break-all;
+}
+
+.qr-modal-actions {
+    margin-top: 14px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media (max-width: 600px) {
+    .form-page-center {
+        max-width: 100%;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    .full-width {
+        grid-column: 1;
+    }
+}

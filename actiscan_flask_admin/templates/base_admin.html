@@ -4,23 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Panel Admin - ActiScan{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css', v='20260330-center1') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
-<body class="admin-body">
+<body class="admin-body" data-page="{% block page %}{% endblock %}">
+    <div id="actiscan-toast" class="actiscan-toast"></div>
+    <div id="qrModal" class="qr-modal" aria-hidden="true">
+        <div class="qr-modal-backdrop" data-close-qr-modal></div>
+        <div class="qr-modal-card" role="dialog" aria-modal="true" aria-labelledby="qrModalTitle">
+            <div class="qr-modal-header">
+                <h3 id="qrModalTitle">QR del Activo</h3>
+                <button type="button" class="icon-btn" data-close-qr-modal title="Cerrar">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="qr-modal-body">
+                <div id="qrModalAsset" class="qr-modal-asset">Activo</div>
+                <div class="qr-visual-wrap">
+                    <div id="qrVisual" class="qr-visual" aria-label="Codigo QR del activo"></div>
+                </div>
+                <div id="qrModalValue" class="qr-modal-value">-</div>
+                <div class="qr-modal-actions">
+                    <button type="button" class="btn-secondary" id="qrPdfBtn">Descargar PDF</button>
+                    <button type="button" class="btn-secondary" id="qrCopyBtn">Copiar QR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="admin-layout">
         <aside class="sidebar" id="sidebar">
             <nav class="sidebar-nav">
                 <a href="{{ url_for('dashboard') }}" class="sidebar-link {% block nav_dashboard %}{% endblock %}">Dashboard</a>
                 <a href="{{ url_for('activos') }}" class="sidebar-link {% block nav_activos %}{% endblock %}">Activos</a>
-                <a href="{{ url_for('categorias') }}" class="sidebar-link {% block nav_categorias %}{% endblock %}">Categoría Activos</a>
-                <a href="{{ url_for('auditoria') }}" class="sidebar-link {% block nav_auditoria %}{% endblock %}">Auditoría</a>
-                <a href="{{ url_for('usuarios') }}" class="sidebar-link {% block nav_usuarios %}{% endblock %}">Gestión de usuarios</a>
+                <a href="{{ url_for('categorias') }}" class="sidebar-link {% block nav_categorias %}{% endblock %}">Categoria Activos</a>
+                <a href="{{ url_for('auditoria') }}" class="sidebar-link {% block nav_auditoria %}{% endblock %}">Auditoria</a>
+                <a href="{{ url_for('usuarios') }}" class="sidebar-link {% block nav_usuarios %}{% endblock %}">Gestion de usuarios</a>
                 <a href="{{ url_for('perfil') }}" class="sidebar-link {% block nav_perfil %}{% endblock %}">Perfil del admin</a>
-                <a href="{{ url_for('cambiar_password') }}" class="sidebar-link {% block nav_password %}{% endblock %}">Cambiar Contraseña</a>
+                <a href="{{ url_for('cambiar_password') }}" class="sidebar-link {% block nav_password %}{% endblock %}">Cambiar Contrasena</a>
 
                 <div class="sidebar-bottom">
-                    <a href="{{ url_for('login') }}" class="logout-link">Cerrar sesión</a>
+                    <a href="{{ url_for('login') }}" class="logout-link" id="logoutLink">Cerrar sesion</a>
                 </div>
             </nav>
         </aside>
@@ -36,19 +60,19 @@
                 <div class="brand">
                     <div class="brand-logo">
                         <div class="mini-box">A</div>
-                        <div class="mini-box">▦</div>
+                        <div class="mini-box">&#9638;</div>
                         <div class="mini-box">S</div>
                         <div class="mini-box"><i class="fa-solid fa-magnifying-glass"></i></div>
                     </div>
                     <div class="brand-text">
                         <h1>ActiScan</h1>
-                        <p>Gestión de Activos</p>
+                        <p>Gestion de Activos</p>
                     </div>
                 </div>
 
-                <div class="user-pill">
-                    <span class="user-badge">GM</span>
-                    <span>Gael Jesus Martinez</span>
+                <div class="user-pill" id="userPill">
+                    <span class="user-badge" id="userBadge">A</span>
+                    <span id="userName">Administrador</span>
                 </div>
             </header>
 
@@ -58,6 +82,11 @@
         </section>
     </div>
 
-    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <script>
+        window.ACTISCAN_API_BASE = "/api-bridge";
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js', v='20260330-center1') }}"></script>
 </body>
 </html>

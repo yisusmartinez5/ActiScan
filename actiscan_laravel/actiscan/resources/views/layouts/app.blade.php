@@ -13,6 +13,7 @@
     <script>
         window.ACTISCAN_API_BASE = "{{ env('ACTISCAN_API_BASE', '/api-bridge') }}";
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="{{ asset('js/actiscan-api.js') }}"></script>
     @yield('scripts')
 </body>

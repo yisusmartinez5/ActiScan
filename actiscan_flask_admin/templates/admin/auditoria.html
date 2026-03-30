@@ -1,19 +1,44 @@
 {% extends "base_admin.html" %}
 
-{% block title %}Auditoría de Activos{% endblock %}
+{% block title %}Auditoria de Activos - ActiScan{% endblock %}
+{% block page %}auditoria{% endblock %}
 {% block nav_auditoria %}active{% endblock %}
 
 {% block content %}
-<h1 class="page-title">Auditoría de Activos</h1>
-<p class="page-subtitle">Registro y control de inspecciones físicas.</p>
-
-<div class="empty-module">
+<div class="page-toolbar">
     <div>
-        <div style="font-size: 3rem; margin-bottom: 16px;">
-            <i class="fa-regular fa-file-lines"></i>
-        </div>
-        <h2 style="margin-bottom: 10px;">Módulo de Auditoría en Construcción</h2>
-        <p>Aquí se visualizarán los reportes de auditoría generados.</p>
+        <h1 class="page-title">Auditoria de Activos</h1>
+        <p class="page-subtitle">Registro y control de inspecciones fisicas.</p>
     </div>
+    <div style="display:flex;gap:10px;">
+        <button id="auditsPdfBtn" type="button" class="btn-secondary" style="display:inline-flex;align-items:center;gap:6px;">
+            <i class="fa-regular fa-file-pdf"></i> Descargar PDF
+        </button>
+        <a href="{{ url_for('crear_auditoria') }}" class="btn-primary" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
+            <i class="fa-solid fa-plus"></i> Nueva auditoria
+        </a>
+    </div>
+</div>
+
+<div class="table-card">
+    <div class="table-tools" style="grid-template-columns: 3fr auto;">
+        <input class="auth-input" id="auditoriaSearch" type="text" placeholder="Buscar auditoria..." style="margin:0;">
+        <button class="filter-btn" id="auditoriaApplyFilter" type="button">Aplicar filtro</button>
+    </div>
+
+    <table class="simple-table">
+        <thead>
+            <tr>
+                <th>Activo</th>
+                <th>Tipo</th>
+                <th>Fecha</th>
+                <th>Resultado</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody id="auditoriaTableBody">
+            <tr><td colspan="5" style="text-align:center;color:#aaa;padding:24px;">Cargando...</td></tr>
+        </tbody>
+    </table>
 </div>
 {% endblock %}

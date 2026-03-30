@@ -11,13 +11,14 @@
             <p class="page-subtitle">Define que informacion sera visible al escanear el activo.</p>
         </div>
 
-        <a class="ghost-button" href="{{ route('capturist.assets.show') }}">Volver</a>
+        <a class="ghost-button" href="{{ route('capturist.assets') }}">Volver</a>
     </div>
 
     <div class="content-card">
         <div class="qr-layout">
             <div>
-                <div class="qr-option-list" data-toggle-group="qr-fields">
+                {{-- data-toggle-independent = cada boton togglea independientemente --}}
+                <div class="qr-option-list" data-toggle-independent="qr-fields">
                     <button class="qr-option-btn active" type="button" data-toggle-option><i class="fa-regular fa-circle-dot"></i><span>Nombre</span></button>
                     <button class="qr-option-btn active" type="button" data-toggle-option><i class="fa-regular fa-circle-dot"></i><span>ID activo</span></button>
                     <button class="qr-option-btn active" type="button" data-toggle-option><i class="fa-regular fa-circle-dot"></i><span>No. serie</span></button>
@@ -32,7 +33,7 @@
                 </div>
 
                 <div class="quick-actions" style="margin-top: 24px; margin-bottom: 0;">
-                    <button class="soft-button" id="generateQrButton" type="button"><i class="fa-solid fa-print"></i><span>Generar QR</span></button>
+                    <button class="soft-button" id="generateQrButton" type="button"><i class="fa-solid fa-print"></i><span>Generar QR y descargar PDF</span></button>
                 </div>
             </div>
 

@@ -1,0 +1,99 @@
+{% extends "base_admin.html" %}
+
+{% block title %}Nuevo Activo - ActiScan{% endblock %}
+{% block page %}crear-activo{% endblock %}
+{% block nav_activos %}active{% endblock %}
+
+{% block content %}
+<div class="form-page-center" style="max-width:860px;margin:0 auto;">
+    <div class="page-toolbar">
+        <div>
+            <h1 class="page-title" id="crearActivoTitle">Nuevo Activo</h1>
+            <p class="page-subtitle">Registrar un nuevo elemento en el inventario.</p>
+        </div>
+        <a href="{{ url_for('activos') }}" class="btn-secondary" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
+            Volver
+        </a>
+    </div>
+
+    <div class="content-card" style="max-width:700px;">
+        <form id="crearActivoForm">
+            <div class="full-width" style="margin-bottom:14px;">
+                <label class="form-label-block">Foto del activo</label>
+                <div id="activoPhotoBox" style="border:2px dashed #d2deea;border-radius:12px;padding:14px;display:flex;align-items:center;gap:14px;cursor:pointer;background:#f8fbff;">
+                    <img id="activoPhotoPreview" alt="Vista previa" style="width:96px;height:96px;object-fit:cover;border-radius:10px;display:none;border:1px solid #d8e4ef;">
+                    <div id="activoPhotoPlaceholder" style="color:#6b86a0;">
+                        <div style="font-weight:700;margin-bottom:4px;">Seleccionar imagen</div>
+                        <div style="font-size:.86rem;">Haz clic para elegir una foto (JPG, PNG, WEBP).</div>
+                    </div>
+                    <input id="activo_foto" type="file" accept="image/*" style="display:none;">
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <div class="full-width">
+                    <label class="form-label-block">Nombre</label>
+                    <input class="auth-input" id="activo_nombre" type="text" placeholder="Laptop Asus ROG" required>
+                </div>
+
+                <div>
+                    <label class="form-label-block">No. Serial</label>
+                    <input class="auth-input" id="activo_serial" type="text" placeholder="SN-0001">
+                </div>
+
+                <div>
+                    <label class="form-label-block">Marca</label>
+                    <select class="auth-select" id="activo_marca">
+                        <option value="">Selecciona marca</option>
+                        <option value="ASUS">ASUS</option>
+                        <option value="Dell">Dell</option>
+                        <option value="HP">HP</option>
+                        <option value="Lenovo">Lenovo</option>
+                        <option value="Acer">Acer</option>
+                        <option value="Apple">Apple</option>
+                        <option value="Otra">Otra</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label-block">Modelo</label>
+                    <input class="auth-input" id="activo_modelo" type="text" placeholder="ROG Strix G15">
+                </div>
+
+                <div>
+                    <label class="form-label-block">Categoria</label>
+                    <select class="auth-select" id="activo_categoria" required>
+                        <option value="">Selecciona categoria</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label-block">Estado</label>
+                    <select class="auth-select" id="activo_estado" required>
+                        <option value="">Selecciona estado</option>
+                    </select>
+                </div>
+
+                <div class="full-width">
+                    <label class="form-label-block">Ubicacion</label>
+                    <select class="auth-select" id="activo_ubicacion" required>
+                        <option value="">Selecciona ubicacion</option>
+                    </select>
+                </div>
+
+                <div class="full-width">
+                    <label class="form-label-block">Observaciones</label>
+                    <textarea class="auth-input" id="activo_observaciones" rows="3" placeholder="Notas o condiciones especiales..." style="height:auto;padding-top:12px;"></textarea>
+                </div>
+            </div>
+
+            <p id="crearActivoMessage" style="font-size:.85rem;color:#e55;margin-top:10px;min-height:18px;"></p>
+
+            <div class="form-actions">
+                <a href="{{ url_for('activos') }}" class="btn-secondary" style="text-decoration:none;display:inline-flex;align-items:center;">Cancelar</a>
+                <button class="btn-primary" type="submit" id="crearActivoBtn">Guardar activo</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

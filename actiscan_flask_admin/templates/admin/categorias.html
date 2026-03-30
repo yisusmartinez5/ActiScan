@@ -1,43 +1,35 @@
 {% extends "base_admin.html" %}
 
-{% block title %}Inventario de Activos{% endblock %}
-{% block nav_activos %}active{% endblock %}
+{% block title %}Categorias de Activos - ActiScan{% endblock %}
+{% block page %}categorias{% endblock %}
+{% block nav_categorias %}active{% endblock %}
 
 {% block content %}
-<h1 class="page-title">Inventario de Activos</h1>
-<p class="page-subtitle">Control total de la infraestructura física.</p>
+<div class="page-toolbar">
+    <div>
+        <h1 class="page-title">Categorias de Activos</h1>
+        <p class="page-subtitle">Clasificacion y gestion de tipos de activos fijos.</p>
+    </div>
+</div>
 
 <div class="table-card">
     <div class="table-tools" style="grid-template-columns: 3fr auto;">
-        <input class="auth-input" type="text" placeholder="Filtrar por nombre, serie o IP..." style="margin:0;">
-        <button class="filter-btn">FILTROS AVANZADOS</button>
+        <input class="auth-input" id="categoriasSearch" type="text" placeholder="Filtrar por nombre o descripcion..." style="margin:0;">
+        <button class="filter-btn" id="categoriasApplyFilter" type="button">Aplicar filtro</button>
     </div>
 
     <table class="simple-table">
         <thead>
             <tr>
-                <th>Activo</th>
-                <th>Categoría</th>
-                <th>Estado</th>
-                <th>Ubicación</th>
+                <th>Icono</th>
+                <th>Categoria</th>
+                <th>Descripcion</th>
+                <th>Total activos</th>
                 <th>Opciones</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>Laptop Asus ROG<br><small>AST0001</small></td>
-                <td>Computadora</td>
-                <td>● OPERACIONAL</td>
-                <td>C-207</td>
-                <td class="option-icons"><i class="fa-regular fa-eye"></i><i class="fa-regular fa-trash-can"></i></td>
-            </tr>
-            <tr>
-                <td>Laptop MSI<br><small>AST0003</small></td>
-                <td>Computadora</td>
-                <td>● MANTENIMIENTO</td>
-                <td>A-207</td>
-                <td class="option-icons"><i class="fa-regular fa-eye"></i><i class="fa-regular fa-trash-can"></i></td>
-            </tr>
+        <tbody id="categoriasTableBody">
+            <tr><td colspan="5" style="text-align:center;color:#aaa;padding:24px;">Cargando...</td></tr>
         </tbody>
     </table>
 </div>

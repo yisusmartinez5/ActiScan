@@ -3,6 +3,7 @@
 @section('body_class', 'admin-body')
 
 @section('app_content')
+    <div id="actiscan-toast" class="actiscan-toast"></div>
     <div class="admin-layout">
         <aside class="sidebar" id="sidebar">
             <nav class="sidebar-nav">

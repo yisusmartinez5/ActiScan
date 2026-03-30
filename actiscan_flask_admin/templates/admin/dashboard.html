@@ -1,75 +1,73 @@
 {% extends "base_admin.html" %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}Dashboard - ActiScan{% endblock %}
+{% block page %}dashboard{% endblock %}
 {% block nav_dashboard %}active{% endblock %}
 
 {% block content %}
-<h1 class="page-title">Dashboard</h1>
-
-<div class="stats-grid">
-    <div class="stat-card">
-        <div class="stat-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
-        <div class="stat-title">Total de activos</div>
+<div class="page-toolbar">
+    <div>
+        <h1 class="page-title">Dashboard</h1>
+        <p class="page-subtitle">Vista general del inventario y accesos rapidos.</p>
     </div>
-    <div class="stat-card">
-        <div class="stat-icon"><i class="fa-solid fa-file-lines"></i></div>
-        <div class="stat-title">Auditorías realizadas</div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-icon"><i class="fa-solid fa-circle-info"></i></div>
-        <div class="stat-title">Activos con observaciones</div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
-        <div class="stat-title">Total de usuarios</div>
+    <div class="dropdown-wrapper">
+        <button class="btn-primary" id="createMenuBtn" type="button">
+            <i class="fa-solid fa-plus"></i> Crear
+        </button>
+        <div class="dropdown-menu" id="createMenu">
+            <a href="{{ url_for('crear_activo') }}"><i class="fa-solid fa-box"></i> Activo</a>
+            <a href="{{ url_for('crear_auditoria') }}"><i class="fa-regular fa-file-lines"></i> Auditoria</a>
+        </div>
     </div>
 </div>
 
-<div class="quick-actions">
-    <a href="#">+ Activo</a>
-    <a href="#">+ Auditoría</a>
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+        <div class="stat-title"><span id="dashTotalActivos">-</span></div>
+        <div class="stat-sub">Total de activos</div>
+    </div>
+    <div class="stat-card stat-link" onclick="window.location.href='{{ url_for('auditoria') }}'">
+        <div class="stat-icon"><i class="fa-regular fa-file-lines"></i></div>
+        <div class="stat-title"><span id="dashAuditorias">-</span></div>
+        <div class="stat-sub">Auditorias realizadas</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon"><i class="fa-solid fa-circle-info"></i></div>
+        <div class="stat-title"><span id="dashActObs">-</span></div>
+        <div class="stat-sub">Activos con observaciones</div>
+    </div>
+    <div class="stat-card stat-link" onclick="window.location.href='{{ url_for('usuarios') }}'">
+        <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+        <div class="stat-title"><span id="dashTotalUsuarios">-</span></div>
+        <div class="stat-sub">Total de usuarios</div>
+    </div>
 </div>
 
 <div class="table-card">
     <div class="table-tools">
-        <input class="auth-input" type="text" placeholder="Buscar producto..." style="margin:0;">
-        <input class="auth-input" type="text" placeholder="" style="margin:0;">
-        <input class="auth-input" type="text" placeholder="" style="margin:0;">
-        <button class="btn-primary">Aplicar Filtro</button>
+        <input class="auth-input" id="dashSearch" type="text" placeholder="Buscar activo..." style="margin:0;">
+        <select class="auth-select" id="dashCatFilter">
+            <option value="">Categoria</option>
+        </select>
+        <select class="auth-select" id="dashStatusFilter">
+            <option value="">Estado</option>
+        </select>
+        <button class="btn-primary" id="dashApplyFilter" type="button">Aplicar filtro</button>
     </div>
 
     <table class="simple-table">
         <thead>
             <tr>
-                <th>Folio</th>
-                <th>Fecha</th>
-                <th>Estatus</th>
-                <th>Artículos</th>
-                <th>Acción</th>
+                <th>Activo</th>
+                <th>Categoria</th>
+                <th>Estado</th>
+                <th>Ubicacion</th>
+                <th>Accion</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>DR-030</td>
-                <td>02/10/2025</td>
-                <td>Enviado</td>
-                <td>5</td>
-                <td class="option-icons"><i class="fa-regular fa-eye"></i><i class="fa-regular fa-trash-can"></i></td>
-            </tr>
-            <tr>
-                <td>DR-029</td>
-                <td>28/09/2025</td>
-                <td>Surtido</td>
-                <td>3</td>
-                <td class="option-icons"><i class="fa-regular fa-eye"></i><i class="fa-regular fa-trash-can"></i></td>
-            </tr>
-            <tr>
-                <td>DR-028</td>
-                <td>25/09/2025</td>
-                <td>Recibido</td>
-                <td>4</td>
-                <td class="option-icons"><i class="fa-regular fa-eye"></i><i class="fa-regular fa-trash-can"></i></td>
-            </tr>
+        <tbody id="dashTableBody">
+            <tr><td colspan="5" style="text-align:center;color:#aaa;padding:24px;">Cargando...</td></tr>
         </tbody>
     </table>
 </div>

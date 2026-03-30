@@ -55,17 +55,24 @@ Route::match(['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], '/api-bridge/{path}', fu
 
     $candidateBases = array_values(array_unique(array_filter([
         env('ACTISCAN_API_BASE'),
-        'http://127.0.0.1:8001/api',
-        'http://localhost:8001/api',
-        'http://host.docker.internal:8001/api',
+        env('ACTISCAN_API_V1_BASE'),
+        'http://actiscan_fastapi:8001/api',
+        'http://actiscan_fastapi:8001/api/v1',
         'http://fastapi:8001/api',
+        'http://fastapi:8001/api/v1',
+        'http://127.0.0.1:8001/api',
+        'http://127.0.0.1:8001/api/v1',
+        'http://localhost:8001/api',
+        'http://localhost:8001/api/v1',
+        'http://host.docker.internal:8001/api',
+        'http://host.docker.internal:8001/api/v1',
         'http://127.0.0.1:8000/api',
         'http://localhost:8000/api',
     ])));
 
     if ($resolvedBase === null) {
         foreach ($candidateBases as $base) {
-            $rootBase = preg_replace('/\/api$/', '', rtrim($base, '/'));
+            $rootBase = preg_replace('/\/api(\/v1)?$/', '', rtrim($base, '/'));
             try {
                 $healthResponse = Http::timeout(2)->get($rootBase.'/health');
                 $checkedBases[] = $base;

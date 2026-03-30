@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <div class="preview-box dark">
+            <div class="preview-box dark" id="assetPreviewBox">
                 <div class="preview-placeholder" style="color: #d6dee5;">
                     <i class="fa-solid fa-laptop"></i>
                     <p id="assetPreviewTitle">Vista del activo</p>

@@ -1,0 +1,51 @@
+services:
+  fastapi:
+    build:
+      context: .
+      dockerfile: actiscan_fastapi/dockerfile
+    container_name: actiscan_fastapi
+    ports:
+      - "8001:8001"
+    environment:
+      - ACTISCAN_SQL_DUMP=/app/actiscan (1).sql
+      - ACTISCAN_DB_PATH=/app/data/actiscan.db
+    volumes:
+      - ./actiscan_fastapi/data:/app/data
+    networks:
+      - actiscan_net
+
+  flask_admin:
+    build:
+      context: ./actiscan_flask_admin
+      dockerfile: dockerfile
+    container_name: actiscan_flask_admin
+    ports:
+      - "5000:5000"
+    environment:
+      - ACTISCAN_API_BASE=http://fastapi:8001/api
+      - ACTISCAN_API_V1_BASE=http://fastapi:8001/api/v1
+    depends_on:
+      - fastapi
+    networks:
+      - actiscan_net
+
+  laravel:
+    build:
+      context: ./actiscan_laravel/actiscan
+      dockerfile: dockerfile
+    container_name: actiscan_laravel
+    ports:
+      - "8000:8000"
+    environment:
+      - ACTISCAN_API_BASE=http://fastapi:8001/api
+      - APP_KEY=base64:uH2IDZDdDNT3zk+kBy464eJz2dEVviHDiff4QiBP6Ec=
+      - SESSION_DRIVER=file
+      - CACHE_STORE=file
+    depends_on:
+      - fastapi
+    networks:
+      - actiscan_net
+
+networks:
+  actiscan_net:
+    driver: bridge

@@ -7,9 +7,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
-<body class="auth-body">
+<body class="auth-body" data-page="{% block page %}{% endblock %}">
+    <div id="actiscan-toast" class="actiscan-toast"></div>
     <main class="auth-page">
         {% block content %}{% endblock %}
     </main>
+    <script>
+        window.ACTISCAN_API_BASE = "/api-bridge";
+    </script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>
 </html>
